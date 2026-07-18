@@ -26,6 +26,17 @@ export default function Home() {
         <div className={`home-title ${hoverState !== "" ? `home-title--${hoverState}` : ""}`}>
           <div className="home-title--top">Sophisticated</div>
           <div className="home-title--bottom">skincare</div>
+          <div className="home-small">
+            <div className="home-info">
+              Skinstric developed an A.I. that creates
+              a highly-personalised routine tailored to
+              what your skin needs.
+            </div>
+            <div className="home-button--wrapper">
+              <div className="home-button--text">TAKE TEST</div>
+              <Image src={button} alt="right" style={{ rotate: "180deg" }} />
+            </div>
+          </div>
         </div>
         <div className={`home-button ${hoverState === "left" ? "hidden" : ""}`}>
           <div className="home-button--rectangle"></div>
