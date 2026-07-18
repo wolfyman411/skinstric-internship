@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import button from "../public/assets/buttin-icon-shrunk.svg";
+import Link from "next/link";
 
 export default function Home() {
   const [hoverState, setHoverState] = useState("");
@@ -40,14 +41,14 @@ export default function Home() {
         </div>
         <div className={`home-button ${hoverState === "left" ? "hidden" : ""}`}>
           <div className="home-button--rectangle"></div>
-          <div
+          <Link href="/testing"
             className="home-button--wrapper"
             onMouseEnter={() => setHoverState("right")}
             onMouseLeave={() => setHoverState("")}
           >
             <div className="home-button--text">TAKE TEST</div>
             <Image src={button} alt="right" style={{ rotate: "180deg" }} />
-          </div>
+          </Link>
         </div>
       </div>
       <div className="home-info">
