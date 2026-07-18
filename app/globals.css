@@ -35,8 +35,8 @@ html, body {
 
 #home .row {
   align-items: center;
-  justify-content: space-between;
   height: 84vh;
+  position: relative;
 }
 
 .home-title {
@@ -45,20 +45,44 @@ html, body {
   line-height: 120px;
   letter-spacing: -7%;
   text-align: center;
-  max-width: 680px;
-  transition: text-align 0.2s ease;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  transition: all 1s ease;
 }
 
+.home-title--bottom {
+  transition: all 1s ease;
+  transform: translateX(0%);
+}
+
+.home-title--right .home-title--bottom {
+  transform: translateX(-20%);
+}
+
+.home-title--left .home-title--bottom {
+  transform: translateX(20%);
+}
+
+
 .home-title--right {
-  text-align: left;
+  left: 0%;
+  transform: translateX(0%);
 }
 
 .home-title--left {
-  text-align: right;
+  transform: translateX(50%);
 }
 
 .home-button {
+  position: absolute;
+  left: 0;
   transition: opacity 0.2s ease;
+}
+
+.home-button:nth-child(3) {
+  left: 100%;
+  transform: translateX(-100%);
 }
 
 .home-button--wrapper {

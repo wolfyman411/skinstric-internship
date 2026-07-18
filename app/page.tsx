@@ -24,7 +24,8 @@ export default function Home() {
           </div>
         </div>
         <div className={`home-title ${hoverState !== "" ? `home-title--${hoverState}` : ""}`}>
-          Sophisticated skincare
+          <div className="home-title--top">Sophisticated</div>
+          <div className="home-title--bottom">skincare</div>
         </div>
         <div className={`home-button ${hoverState === "left" ? "hidden" : ""}`}>
           <div className="home-button--rectangle"></div>
