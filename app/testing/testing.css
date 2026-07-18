@@ -1,7 +1,107 @@
+#testing {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#testing .row {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    padding: 32px 0px;
+}
+
 .testing-button--text {
     font-size: 14px;
     line-height: 16px;
     letter-spacing: -2%;
     font-weight: 600;
     padding-left: 16px;
+}
+
+.testing-analysis {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    text-transform: uppercase;
+    top: 0;
+    padding-top: 64px;
+    position: absolute;
+}
+
+.testing-rectangle {
+  border: #A0A4AB80 dotted 2px;
+  width: 400px;
+  aspect-ratio: 1/1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: -1;
+  transition: opacity 0.2s ease;
+  animation: "spin" 100s linear infinite;
+}
+
+.testing-rectangle:nth-child(2) {
+  border: #A0A4Ab60 dotted 2px;
+  width: 480px;
+  animation: "spin" 90s linear infinite;
+}
+
+.testing-rectangle:nth-child(3) {
+  animation: "spin" 80s linear infinite;
+  border: #a0a4ab40 dotted 2px;
+  width: 560px;
+}
+
+.testing-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    color: #1a1b1c7f;
+}
+
+.testing-input {
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 64px;
+    letter-spacing: -7%;
+    text-align: center;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    max-width: 430px;
+}
+
+.testing-input:focus-visible {
+    outline: 0;
+}
+
+.testing-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.testing-back-button {
+    margin-top: auto;
+    margin-bottom: 24px;
 }
