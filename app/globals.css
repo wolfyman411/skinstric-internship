@@ -1,6 +1,79 @@
 @import url(https://db.onlinewebfonts.com/c/0ab46e1b2f236c9fad58c1e34cdecdf1?family=Roobert);
-@import "tailwindcss";
 
 * {
   font-family: roobert, roobert Fallback;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #1a1b1c;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 128px;
+  line-height: 120px;
+  letter-spacing: -7%;
+  text-align: center;
+}
+
+.container {
+  padding: 16px 32px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
+
+/*  HOME  */
+
+#home .row {
+  align-items: center;
+  justify-content: space-between;
+  height: 84vh;
+}
+
+.home-button {
+}
+
+.home-button--wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.home-button--text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -2%;
+  padding: 0px 8px;
+  color: #1a1b1c7f;
+}
+
+.home-rectangle {
+  border: #A0A4AB dotted 2px;
+  width: 45vh;
+  aspect-ratio: 1/1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: -1;
+}
+
+.home-rectangle--left {
+  left: 0;
+}
+
+.home-rectangle--right {
+  left: 100%;
+}
+
+.home-info {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  max-width: 300px;
 }

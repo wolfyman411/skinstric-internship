@@ -1,0 +1,35 @@
+header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+}
+
+.logo-text, .tab-text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -2%;
+    color: #1A1B1C;
+}
+
+.tab-text {
+    color: #1a1b1c7f;
+    padding-left: 8px;
+}
+
+.button-simple {
+    opacity: 1;
+    padding: 8px 16px;
+    gap: 8px;
+    background: #1A1B1C;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: -2%;
+    color: #FCFCFC;
+}

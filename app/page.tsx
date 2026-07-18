@@ -1,9 +1,33 @@
+import Image from "next/image"
+import button from "../public/assets/buttin-icon-shrunk.svg"
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-[71vh] relative">
-      <div className="h-[300px] w-[300px] border-2 border-[#A0A4AB] border-dotted absolute rotate-45 left-0"></div>
-      <div className="font-light text-[128px] leading-[120px] text-center text-[#1A1B1C]">Sophisticated skincare</div>
-      <div className="h-[300px] w-[300px] border-2 border-[#A0A4AB] border-dotted absolute rotate-45 right-0"></div>
-    </div>
+    <section id="home" className="container">
+      <div className="home-rectangle home-rectangle--left"></div>
+      <div className="home-rectangle home-rectangle--right"></div>
+      <div className="row">
+        <div className="home-button">
+          <div className="home-button--rectangle"></div>
+          <div className="home-button--wrapper">
+            <Image src={button} alt="left"/>
+            <div className="home-button--text">DISCOVER A.I.</div>
+          </div>
+        </div>
+        <h1>Sophisticated skincare</h1>
+        <div className="home-button">
+          <div className="home-button--rectangle"></div>
+          <div className="home-button--wrapper">
+            <div className="home-button--text">TAKE TEST</div>
+            <Image src={button} alt="right" style={{rotate:"180deg"}}/>
+          </div>
+        </div>
+      </div>
+      <div className="home-info">
+        Skinstric developed an A.I. that creates 
+        a highly-personalised routine tailored to 
+        what your skin needs.
+      </div>
+    </section>
   );
 }

@@ -1,13 +1,14 @@
 import React from 'react'
+import "./header.css"
 
 export default function Header() {
   return (
-    <div className='flex justify-between px-16 py-11 items-center'>
-      <div className="flex font-semibold text-sm leading-[16px]">
-        <div className=''>SKINSTRIC</div>
-        <div className='text-[#1A1B1C70] px-4'>[ INTRO ]</div>
+    <header className='container'>
+      <div className="header-left">
+        <div className='logo-text'>SKINSTRIC</div>
+        <div className='tab-text'>[ INTRO ]</div>
       </div>
-      <div className='py-4 px-8 leading-[16px] font-semibold bg-[#1A1B1C] text-[#FCFCFC] text-[10px]'>ENTER CODE</div>
-    </div>
+      <div className='button-simple'>ENTER CODE</div>
+    </header>
   )
 }
