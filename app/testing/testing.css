@@ -105,3 +105,23 @@
     margin-top: auto;
     margin-bottom: 24px;
 }
+
+.home-button--wrapper {
+    width: 0%;
+    justify-content:left;
+}
+
+@media (max-width:700px) {
+
+    .testing-rectangle:nth-child(1) {
+        width: 30vw;
+    }
+
+    .testing-rectangle:nth-child(2) {
+        width: 40vw;
+    }
+
+    .testing-rectangle:nth-child(3) {
+        width: 50vw;
+    }
+}
