@@ -142,13 +142,13 @@ export default function page() {
                 <div className="testing-back">
                     <Link href="/" className="home-button--wrapper">
                         <Image src={button} alt="back"/>
-                        <div className="testing-button--text">BACK</div>
+                        <div className="back-button--text">BACK</div>
                     </Link>
                 </div>
                 {finished && (
                     <div className="testing-back">
                         <Link href="/result" className="home-button--wrapper">
-                            <div className="testing-button--text testing-button--text--right">PROCEED</div>
+                            <div className="back-button--text testing-button--text--right">PROCEED</div>
                             <Image src={button} alt="next" style={{rotate:"180deg"}}/>
                         </Link>
                     </div>
