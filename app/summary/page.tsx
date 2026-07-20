@@ -16,19 +16,23 @@ export default function page() {
             <div className="analysis-chart--wrapper">
                 <div className="chart-tabs">
                     <div className="chart-tab chart-tab--active">
+                        <div className="chart-tab--line"></div>
                         <div className="chart-tab--selection">east asian</div>
                         <div className="chart-tab--title">race</div>
                     </div>
                     <div className="chart-tab">
-                        <div className="chart-tab--selection">east asian</div>
-                        <div className="chart-tab--title">race</div>
+                        <div className="chart-tab--line"></div>
+                        <div className="chart-tab--selection">20-29</div>
+                        <div className="chart-tab--title">age</div>
                     </div>
                     <div className="chart-tab">
-                        <div className="chart-tab--selection">east asian</div>
-                        <div className="chart-tab--title">race</div>
+                        <div className="chart-tab--line"></div>
+                        <div className="chart-tab--selection">female</div>
+                        <div className="chart-tab--title">sex</div>
                     </div>
                 </div>
                 <div className="chart-display">
+                    <div className="chart-tab--line"></div>
                     <div className="chart-display--title">East asian</div>
                     <div className="chart-display--graph--wrapper">
                         <div className="chart-display--graph"></div>

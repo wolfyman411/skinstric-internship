@@ -1,0 +1,105 @@
+#summary .container {
+    width: 100vw;
+    height: 100vh;
+}
+
+#summary .row {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-analysis {
+    padding-top: 48px;
+    position: absolute;
+}
+
+.summary-analysis--analysis {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    text-transform: uppercase;
+}
+
+.summary-analysis--title {
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 64px;
+    letter-spacing: -6%;
+    text-transform: uppercase;
+}
+
+.summary-analysis--subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+}
+
+.analysis-chart--wrapper {
+    display: flex;
+    width: 100%;
+    padding-top: 256px;
+}
+
+.chart-tabs {
+    width: 10%;
+}
+
+.chart-tab {
+    background: #F3F3F4;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.chart-tab:hover {
+    background: #E1E1E2;
+}
+
+.chart-tab--active:hover {
+    background: #101111;
+}
+
+.chart-tab--selection, .chart-tab--title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    text-transform: uppercase;
+    padding: 12px;
+}
+
+.chart-tab--line {
+    width: 100%;
+    background: #1A1B1C;
+    padding-bottom: 1px;
+}
+
+.chart-tab--active {
+    background: #1A1B1C;
+
+    .chart-tab--selection, .chart-tab--title {
+        color: #F3F3F4;
+    }
+}
+
+.chart-display {
+    width: 70%;
+    background-color: #F3F3F4;
+    margin: 0px 12px;
+}
+
+.chart-options--wrapper {
+    width: 20%;
+}
+
+.chart-display--title {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -5%;
+    padding: 12px;
+}
