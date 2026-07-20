@@ -33,6 +33,11 @@ a {
   padding-left: 16px;
 }
 
+.back-button--text--right {
+    padding-left: 0px;
+    padding-right: 16px;
+}
+
 /*  HOME  */
 
 #home {

@@ -51,22 +51,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: not-allowed;
+    --offset: 120px;
+    --rotate: 0deg;
+    --scale: 1;
+    transform: translate(-50%, -50%) rotate(var(--rotate)) translateY(calc(-1 * var(--offset))) rotate(calc(-1 * var(--rotate))) scale(var(--scale));
+    transition: transform 180ms ease;
 }
 
-.option:nth-child(1) {
-    transform: translate(-50%, calc(-50% - 120px));
+.option:hover {
+    --scale: 1.1;
 }
 
 .option:nth-child(2) {
-    transform: translate(calc(-50% + 120px), -50%);
+    --rotate: 0deg;
+    cursor: pointer;
 }
 
 .option:nth-child(3) {
-    transform: translate(-50%, calc(-50% + 120px));
+    --rotate: 90deg;
 }
 
 .option:nth-child(4) {
-    transform: translate(calc(-50% - 120px), -50%);
+    --rotate: 180deg;
+}
+
+.option:nth-child(5) {
+    --rotate: 270deg;
 }
 
 .option-square {
@@ -80,6 +91,10 @@
     inset: 50% auto auto 50%;
 }
 
+.option:hover .option-square {
+    background: #E1E1E2;
+}
+
 .option-text {
     font-weight: 600;
     font-size: 16px;
@@ -90,4 +105,58 @@
     text-transform: uppercase;
     position: relative;
     z-index: 1;
+}
+
+.option-rect--pulse {
+    border: #A0A4AB80 dotted 2px;
+    width: 340px;
+    aspect-ratio: 1/1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: -1;
+    transition: opacity 0.2s ease;
+    animation: "pulse" 10s ease-out infinite;
+}
+
+.option-rect--pulse:nth-child(2) {
+    animation: "pulse" 10s ease-out infinite 2s;
+    filter: opacity(0);
+}
+
+.option-rect--pulse:nth-child(3) {
+    animation: "pulse" 10s ease-out infinite 4s;
+    filter: opacity(0);
+}
+
+.option-rect--pulse:nth-child(4) {
+    animation: "pulse" 10s ease-out infinite 6s;
+    filter: opacity(0);
+}
+
+@keyframes pulse {
+    0% {
+        filter: opacity(0);
+        width: 340px;
+    }
+    10% {
+        filter: opacity(1);
+    }
+    100% {
+        filter: opacity(0);
+        width: 500px;
+    }
+}
+
+.buttons--wrapper {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 24px 48px;
 }
