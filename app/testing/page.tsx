@@ -5,6 +5,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
 import "./testing.css"
+import axios from 'axios';
 
 export default function page() {
 
@@ -13,23 +14,58 @@ export default function page() {
   const [location,setLocation] = useState("")
   const [processing,setProcessing] = useState(false)
   const [finished,setFinished] = useState(false)
+  const [errorMessage,setErrorMessage] = useState("")
+  const regex = /^[A-Za-z\s]+$/
 
   function submitName() {
-    console.log("test")
-    if (name.length > 0) {
-        setCurrentForm(currentForm+1)
+    if (name.trim().length > 0) {
+        if (regex.test(name)) {
+            setErrorMessage("")
+            setCurrentForm(currentForm+1)
+        }
+        else {
+            setErrorMessage("Please only include valid letters! (no numbers or symbols)")
+        }
+    }
+    else {
+        setErrorMessage("Please input your name!")
     }
   }
 
-  function submitForm() {
-    if (location.length > 0) {
-        setCurrentForm(currentForm+1)
+  async function submitForm() {
+    if (location.trim().length > 0) {
+        if (!regex.test(location)) {
+            setErrorMessage("Please only include valid letters! (no numbers or symbols)")
+            return
+        }
+    }
+    else {
+        setErrorMessage("Please input your location!")
+        return
     }
     setProcessing(true)
+
+    // Send info
+    axios
+    .post("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",{
+        name,
+        location,
+    })
+    .then((response) => {
+        if (response.data.success) {
+            setFinished(true)
+        }
+        else {
+            setFinished(false)
+            setProcessing(false)
+            setCurrentForm(0)
+            setErrorMessage("An error has occurred, please resubmit!")
+        }
+    })
   }
 
   function formHTML() {
-    if (processing) {
+    if (processing && !finished) {
         return (
             <>
             <div className="testing-subtitle--bigger">Processing...</div>
@@ -44,7 +80,7 @@ export default function page() {
     else {
         if (finished) {
             return (
-            <>
+                <>
                 <div className="testing-subtitle--bigger">Thank You!</div>
                 <div className="testing-subtitle">Proceed to the next step</div>
                 </>
@@ -53,8 +89,9 @@ export default function page() {
         else {
             return (
                 <>
-                    <div className="testing-subtitle">click to type</div>
-                    {displayHTML()}
+                <div className="testing-subtitle">click to type</div>
+                <div className="testing-error">{errorMessage}</div>
+                {displayHTML()}
                 </>
             )
         }
