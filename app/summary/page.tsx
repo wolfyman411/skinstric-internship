@@ -1,10 +1,44 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useRef } from 'react'
 import './summary.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
+import { ArcElement, Chart, DoughnutController, Tooltip } from 'chart.js';
+
+Chart.register(DoughnutController, ArcElement, Tooltip)
 
 export default function page() {
+  const chartRef = useRef<HTMLCanvasElement | null>(null)
+
+  useEffect(() => {
+    if (!chartRef.current) return
+
+    const chart = new Chart(chartRef.current, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [96, 4],
+          backgroundColor: ['#1A1B1C', '#C1C2C3'],
+          borderWidth: 0,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '98%',
+        plugins: {
+          tooltip: {
+            enabled: false,
+          },
+        },
+      },
+    })
+
+    return () => chart.destroy()
+  }, [])
+
   return (
     <section id="summary" className="container">
         <div className="row">
@@ -33,10 +67,12 @@ export default function page() {
                 </div>
                 <div className="chart-display">
                     <div className="chart-tab--line"></div>
-                    <div className="chart-display--title">East asian</div>
-                    <div className="chart-display--graph--wrapper">
-                        <div className="chart-display--graph"></div>
-                        <div className="chart-display--graph-text">96%</div>
+                    <div className='chart-display--wrapper'>
+                        <div className="chart-display--title">East asian</div>
+                        <div className="chart-display--graph--wrapper">
+                            <canvas ref={chartRef} className="chart-display--graph" />
+                            <div className="chart-display--graph-text">96%</div>
+                        </div>
                     </div>
                 </div>
                 <div className="chart-options--wrapper">

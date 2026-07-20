@@ -103,3 +103,31 @@
     letter-spacing: -5%;
     padding: 12px;
 }
+
+.chart-display--graph--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 12px;
+    padding-top: 15vh;
+}
+
+.chart-display--graph-text {
+    position: absolute;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    text-transform: uppercase;
+}
+
+.chart-display--graph {
+    height: 384px;
+}
+
+.chart-display--wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
