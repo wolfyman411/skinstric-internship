@@ -5,16 +5,30 @@ export interface Demographics {
 }
 
 export function getSortedInfo(demo: Demographics, type: string): [string, number][] {
+
     let info: Record<string, number>
     if (type === "race") {
         info = demo.race
     } else if (type === "age") {
-        return (Object.entries(demo.age))
+        info = demo.age
     } else {
         info = demo.gender
     }
 
+    
+    if (!info) {
+        return [];
+    }
+
     return Object.entries(info).sort((a, b) => b[1] - a[1])
+}
+
+export function getHighest(demo: Demographics, type: string): [string,number] {
+    const value = getSortedInfo(demo,type)[0]
+    if (!value) {
+        return ["",0]
+    }
+    return value
 }
 
 export const defaultDemo:Demographics = { // This is a fallback used for testing OR if the user skips image upload

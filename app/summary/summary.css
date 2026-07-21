@@ -169,7 +169,7 @@
 .chart-option--active {
     background: #1A1B1C;
 
-    .chart-option--name {
+    .chart-option--name, .chart-option--right {
         color: #E1E1E2;
     }
 
