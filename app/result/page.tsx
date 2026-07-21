@@ -11,11 +11,14 @@ import Link from 'next/link'
 import Processing from '@/components/Processing'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { useBoundStore } from '@/public/zustand/zustand'
+import { Demographics } from '@/public/demographics'
 
 export default function page() {
     const galleryInputRef = useRef<HTMLInputElement>(null)
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const navigator = useRouter()
+    const setDemographics = useBoundStore((state:any) => state.setDemographics)
 
     useEffect(() => {
         if (selectedImage) {
@@ -43,6 +46,12 @@ export default function page() {
             if (response.data.success) {
                 alert("Image analyzed successfully!")
                 navigator.push("/select")
+                const newDemo:Demographics = {
+                    race: response.data.data.race,
+                    age: response.data.data.age,
+                    gender: response.data.data.gender,
+                }
+                setDemographics(newDemo)
             }
             else {
                 alert("Image upload failed, try again.")

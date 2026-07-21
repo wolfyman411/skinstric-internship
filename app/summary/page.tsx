@@ -36,7 +36,10 @@ export default function page() {
         setSex(getHighest(defaultDemo,"sex"))
         setDisplayItems(getSortedInfo(defaultDemo,"race"))
     } else {
-        getDisplay("race")
+        setRace(getHighest(demo,"race"))
+        setAge(getHighest(demo,"age"))
+        setSex(getHighest(demo,"sex"))
+        setDisplayItems(getSortedInfo(demo,"race"))
     }
   },[])
 
