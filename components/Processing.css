@@ -1,0 +1,40 @@
+.processing-text {
+    font-size: 24px;
+    letter-spacing: 7%;
+    color: #1a1b1c;
+    padding-bottom: 24px;
+}
+
+.processing-dots {
+    display: flex;
+}
+
+.processing-dot {
+    height: 12px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: #A0A4Ab60;
+    margin: 8px;
+    animation: dot-anim 1s ease-in-out infinite;
+}
+
+.processing-dot:nth-child(2) {
+    animation: dot-anim 1s ease-in-out infinite 0.1s;
+}
+
+.processing-dot:nth-child(3) {
+    animation: dot-anim 1s ease-in-out infinite 0.2s;
+}
+
+@keyframes dot-anim {
+    0% {
+        transform: translateY(0px);
+        filter: brightness(10%);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

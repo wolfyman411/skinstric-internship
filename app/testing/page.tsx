@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
 import "./testing.css"
 import axios from 'axios';
+import Processing from '@/components/Processing';
 
 export default function page() {
 
@@ -67,14 +68,7 @@ export default function page() {
   function formHTML() {
     if (processing && !finished) {
         return (
-            <>
-            <div className="testing-subtitle--bigger">Processing...</div>
-            <div className="testing-dots">
-                <div className="testing-dot"></div>
-                <div className="testing-dot"></div>
-                <div className="testing-dot"></div>
-            </div>
-            </>
+            <Processing/>
         )
     }
     else {

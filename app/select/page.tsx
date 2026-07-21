@@ -38,7 +38,7 @@ export default function page() {
             </div>
              <div className="buttons--wrapper">
                 <div className="testing-back">
-                    <Link href="/testing" className="home-button--wrapper">
+                    <Link href="/result" className="home-button--wrapper">
                         <Image src={button} alt="back"/>
                         <div className="back-button--text">BACK</div>
                     </Link>
