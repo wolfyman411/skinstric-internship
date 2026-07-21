@@ -9,7 +9,7 @@ export function getSortedInfo(demo: Demographics, type: string): [string, number
     if (type === "race") {
         info = demo.race
     } else if (type === "age") {
-        info = demo.age
+        return (Object.entries(demo.age))
     } else {
         info = demo.gender
     }
@@ -28,15 +28,15 @@ export const defaultDemo:Demographics = { // This is a fallback used for testing
         "middle eastern": 0.23229411391401664
     },
     age: {
+        "0-2": 0.12013599592985022,
+        "3-9": 0.11754071465957916,
+        "10-19": 0.060884420054723574,
         "20-29": 0.031678993030692736,
         "30-39": 0.14951751927400894,
         "40-49": 0.21423285073736906,
-        "10-19": 0.060884420054723574,
         "50-59": 0.14185781411091578,
-        "3-9": 0.11754071465957916,
         "60-69": 0.0640062076182385,
         "70+": 0.10014548458462194,
-        "0-2": 0.12013599592985022
     },
     gender: {
         "male": 0.520499217733165,

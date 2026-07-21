@@ -15,6 +15,7 @@ Chart.register(DoughnutController, ArcElement, Tooltip)
 export default function page() {
   const chartRef = useRef<HTMLCanvasElement | null>(null)
   const [displayItems, setDisplayItems] = useState<[string, number][]>([])
+  const [selectedItem, setSelectedItem] = useState<[string, number]>(["", 0])
 
   useEffect(() => {
     if (!chartRef.current) return
@@ -62,11 +63,26 @@ export default function page() {
     getDisplay(type)
   }
 
+  function changeSelectedItem(e:Element,info:[string,number]) {
+
+    const options = document.querySelectorAll(".chart-option")
+
+    for (const option of options) {
+        option.classList.remove("chart-option--active")
+    }
+
+    e.classList.add("chart-option--active")
+
+
+    setSelectedItem([info[0],info[1]])
+  }
+
   function itemHTML([category, value]: [string, number],index:number) {
 
     return (
-        <div className="chart-option" key={index}>
+        <div className="chart-option" key={index} onClick={(e) => changeSelectedItem(e.currentTarget,[category,value])}>
             <div className="chart-option--left">
+                <Image src={radioButtionChecked} alt='radioButton' className="chart-option--icon--checked"></Image>
                 <Image src={radioButtion} alt='radioButton' className="chart-option--icon"></Image>
                 <div className="chart-option--name">{category}</div>
             </div>
@@ -104,11 +120,11 @@ export default function page() {
                 <div className="chart-display">
                     <div className="chart-tab--line"></div>
                     <div className='chart-display--wrapper'>
-                        <div className="chart-display--title">East asian</div>
+                        <div className="chart-display--title">{selectedItem[0]}</div>
                         <div className="chart-display--graph--wrapper">
                             <canvas ref={chartRef} className="chart-display--graph" />
                             <div className="chart-display--graph-text">
-                                <div>96</div>
+                                <div>{Math.floor(selectedItem[1] * 100)}</div>
                                 <div className="chart-display--graph-percentage">%</div>
                             </div>
                         </div>

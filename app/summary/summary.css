@@ -162,8 +162,32 @@
     cursor: pointer;
 }
 
+.chart-option--icon--checked {
+    display: none;
+}
+
+.chart-option--active {
+    background: #1A1B1C;
+
+    .chart-option--name {
+        color: #E1E1E2;
+    }
+
+    .chart-option--icon {
+        display: none;
+    }
+
+    .chart-option--icon--checked {
+        display: block;
+    }
+}
+
 .chart-option:hover {
     background: #E1E1E2;
+}
+
+.chart-option--active:hover {
+    background: #101111;
 }
 
 .chart-option--left {
