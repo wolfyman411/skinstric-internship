@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './summary.css'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,11 +8,13 @@ import button from "../../public/assets/buttin-icon-shrunk.svg";
 import radioButtion from "../../public/assets/radio-button.svg"
 import radioButtionChecked from "../../public/assets/radio-button-checked.svg"
 import { ArcElement, Chart, DoughnutController, Tooltip } from 'chart.js';
+import { defaultDemo, getSortedInfo } from '@/public/demographics'
 
 Chart.register(DoughnutController, ArcElement, Tooltip)
 
 export default function page() {
   const chartRef = useRef<HTMLCanvasElement | null>(null)
+  const [displayItems, setDisplayItems] = useState<[string, number][]>([])
 
   useEffect(() => {
     if (!chartRef.current) return
@@ -41,14 +43,34 @@ export default function page() {
     return () => chart.destroy()
   }, [])
 
-  function itemHTML() {
+  useEffect(() => {
+    getDisplay("race")
+  },[])
+
+  function getDisplay(type:string) {
+    setDisplayItems(getSortedInfo(defaultDemo,type))
+  }
+
+  function changeDisplay(e:Element,type:string) {
+    const tabs = document.querySelectorAll(".chart-tab")
+
+    for (const tab of tabs) {
+        tab.classList.remove("chart-tab--active")
+    }
+
+    e.classList.add("chart-tab--active")
+    getDisplay(type)
+  }
+
+  function itemHTML([category, value]: [string, number],index:number) {
+
     return (
-        <div className="chart-option">
+        <div className="chart-option" key={index}>
             <div className="chart-option--left">
                 <Image src={radioButtion} alt='radioButton' className="chart-option--icon"></Image>
-                <div className="chart-option--name">asian</div>
+                <div className="chart-option--name">{category}</div>
             </div>
-            <div className="chart-option--right">87 %</div>
+            <div className="chart-option--right">{Math.floor(value*100)} %</div>
         </div>
     )
   }
@@ -63,17 +85,17 @@ export default function page() {
             </div>
             <div className="analysis-chart--wrapper">
                 <div className="chart-tabs">
-                    <div className="chart-tab chart-tab--active">
+                    <div className="chart-tab chart-tab--active" onClick={(e) => changeDisplay(e.currentTarget,"race")}>
                         <div className="chart-tab--line"></div>
                         <div className="chart-tab--selection">east asian</div>
                         <div className="chart-tab--title">race</div>
                     </div>
-                    <div className="chart-tab">
+                    <div className="chart-tab" onClick={(e) => changeDisplay(e.currentTarget,"age")}>
                         <div className="chart-tab--line"></div>
                         <div className="chart-tab--selection">20-29</div>
                         <div className="chart-tab--title">age</div>
                     </div>
-                    <div className="chart-tab">
+                    <div className="chart-tab" onClick={(e) => changeDisplay(e.currentTarget,"sex")}>
                         <div className="chart-tab--line"></div>
                         <div className="chart-tab--selection">female</div>
                         <div className="chart-tab--title">sex</div>
@@ -99,7 +121,11 @@ export default function page() {
                         <div className="chart-options--top-item">A.I. confidence</div>
                     </div>
                     <div className="chart-options">
-                        {itemHTML()}
+                        {
+                            displayItems.map((item,index) => (
+                                itemHTML(item,index)
+                            ))
+                        }
                     </div>
                 </div>
             </div>
