@@ -19,10 +19,10 @@ export default function page() {
                     <div className="option-rect--pulse"></div>
                     <div className="option-rect--pulse"></div>
                 </div>
-                <div className="option">
+                <Link href={"/summary"} className="option">
                     <div className="option-square"></div>
                     <div className="option-text">demographics</div>
-                </div>
+                </Link>
                 <div className="option">
                     <div className="option-square"></div>
                     <div className="option-text">cosmetic<br/>concerns</div>

@@ -5,6 +5,8 @@ import './summary.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
+import radioButtion from "../../public/assets/radio-button.svg"
+import radioButtionChecked from "../../public/assets/radio-button-checked.svg"
 import { ArcElement, Chart, DoughnutController, Tooltip } from 'chart.js';
 
 Chart.register(DoughnutController, ArcElement, Tooltip)
@@ -39,6 +41,18 @@ export default function page() {
     return () => chart.destroy()
   }, [])
 
+  function itemHTML() {
+    return (
+        <div className="chart-option">
+            <div className="chart-option--left">
+                <Image src={radioButtion} alt='radioButton' className="chart-option--icon"></Image>
+                <div className="chart-option--name">asian</div>
+            </div>
+            <div className="chart-option--right">87 %</div>
+        </div>
+    )
+  }
+
   return (
     <section id="summary" className="container">
         <div className="row">
@@ -71,23 +85,21 @@ export default function page() {
                         <div className="chart-display--title">East asian</div>
                         <div className="chart-display--graph--wrapper">
                             <canvas ref={chartRef} className="chart-display--graph" />
-                            <div className="chart-display--graph-text">96%</div>
+                            <div className="chart-display--graph-text">
+                                <div>96</div>
+                                <div className="chart-display--graph-percentage">%</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="chart-options--wrapper">
+                    <div className="chart-tab--line"></div>
                     <div className="chart-options--top">
                         <div className="chart-options--top-item">Race</div>
                         <div className="chart-options--top-item">A.I. confidence</div>
                     </div>
                     <div className="chart-options">
-                        <div className="chart-option">
-                            <div className="chart-option--left">
-                                <div className="chart-option--icon"></div>
-                                <div className="chart-option--name">asian</div>
-                            </div>
-                            <div className="chart-option--right">87 %</div>
-                        </div>
+                        {itemHTML()}
                     </div>
                 </div>
             </div>
@@ -100,8 +112,8 @@ export default function page() {
                 </div>
                 <div className="disclaimer">If A.I. estimate is wrong, select the correct one.</div>
                 <div className="footer-buttons">
-                    <div className="footer-button footer-button--reset">reset</div>
-                    <div className="footer-button footer-button--reset">confirm</div>
+                    <div className="footer-button">reset</div>
+                    <Link href={"/select"} className="footer-button">confirm</Link>
                 </div>
             </div>
         </div>
