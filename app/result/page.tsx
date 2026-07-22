@@ -17,6 +17,7 @@ import { Demographics } from '@/public/demographics'
 export default function page() {
     const galleryInputRef = useRef<HTMLInputElement>(null)
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
+    const [openPopup, setOpenPopup] = useState(false)
     const navigator = useRouter()
     const setDemographics = useBoundStore((state:any) => state.setDemographics)
 
@@ -60,6 +61,10 @@ export default function page() {
         })
     }
 
+    function openCamera() {
+        setOpenPopup(false)
+    }
+
     function openGallery() {
         galleryInputRef.current?.click()
     }
@@ -87,8 +92,9 @@ export default function page() {
                 <div className="option-rect"></div>
                 <div className="option-rect"></div>
                 <Image src={pointer_img} alt='pointer' className='pointer'/>
-                <Image src={camera_img} alt='camera' className='option-icon'/>
+                <Image src={camera_img} alt='camera' className='option-icon' onClick={() => setOpenPopup(true)}/>
                 <div className="option-text">allow a.i.<br/>to scan your face</div>
+                {openPopup && popupHTML()}
             </div>
             <div className="option--wrapper" onClick={openGallery}>
                 <div className="option-rect"></div>
@@ -109,6 +115,18 @@ export default function page() {
                 <div className="option-rect"></div>
                 <div className="option-rect"></div>
                 <Processing/>
+            </div>
+        )
+    }
+
+    function popupHTML() {
+        return (
+            <div className="popup__wrapper">
+                <div className="popup__text">Allow A.I to access your camera</div>
+                <div className="popup__footer">
+                    <div className="popup__btn" onClick={() => setOpenPopup(false)}>Deny</div>
+                    <div className="popup__btn" onClick={() => openCamera()}>Allow</div>
+                </div>
             </div>
         )
     }

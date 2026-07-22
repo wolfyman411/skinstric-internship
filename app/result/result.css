@@ -122,6 +122,54 @@
     }
 }
 
+.popup__wrapper {
+    background: #1A1B1C;
+    width: 352px;
+    height: 136px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 300px;
+    margin-top: 80px;
+}
+
+.popup__footer {
+    display: flex;
+    justify-content: end;
+    border-top: #FCFCFC solid 2px;
+}
+
+.popup__text, .popup__btn {
+    color: #FCFCFC;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.popup__text {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    padding: 16px;
+    margin-bottom: 32px;
+}
+
+.popup__btn {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -2%;
+    padding: 16px;
+    cursor: pointer;
+}
+
+.popup__btn:nth-child(1) {
+    color: #FCFCFC70;
+}
+
+.popup__btn:hover {
+    filter: brightness(0.8);
+}
+
 @media (max-width:1200px) {
 
     .option-icon {

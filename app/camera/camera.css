@@ -1,0 +1,132 @@
+#camera.container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.row {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading__wrapper {
+    position: relative;
+}
+
+.loading-rect {
+    border: #A0A4AB80 dotted 2px;
+    width: 300px;
+    aspect-ratio: 1/1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: -1;
+    transition: opacity 0.2s ease;
+    animation: "spin" 100s linear infinite;
+}
+
+.loading-rect:nth-child(2) {
+  border: #A0A4Ab60 dotted 2px;
+  width: 350px;
+  animation: "spin" 90s linear infinite;
+}
+
+.loading-rect:nth-child(3) {
+  animation: "spin" 80s linear infinite;
+  border: #a0a4ab40 dotted 2px;
+  width: 400px;
+}
+
+.loading__header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading__img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading__text {
+    padding-top: 180px;
+    text-align: center;
+    width: 300px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        filter: opacity(1);
+    }
+    50% {
+        filter: opacity(0.5);
+    }
+    100% {
+        filter: opacity(1);
+    }
+}
+
+.loading__footer {
+    padding-top: 600px;
+}
+
+.loading__footer--info {
+    text-align: center;
+    padding-bottom: 32px;
+}
+
+.loading__footer--info,.loading__footer--stub {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+}
+
+.loading__footer--stubs {
+    display: flex;
+    gap: 32px
+}
+
+.loading__footer--stub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading__footer--text {
+    padding-left: 8px;
+}
+
+@media (max-width: 600px) {
+    .loading-rect {
+        width: 35vw;
+    }
+    .loading-rect:nth-child(2) {
+        width: 40vw;
+    }
+
+    .loading-rect:nth-child(3) {
+        width: 45vw;
+    }
+}
