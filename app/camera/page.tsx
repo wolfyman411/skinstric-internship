@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./camera.css"
 import camera_icon from "../../public/assets/camera.svg"
 import camera_shot from "../../public/assets/camera_shot.svg"
@@ -11,18 +11,32 @@ import button from "../../public/assets/buttin-icon-shrunk.svg";
 
 export default function page() {
 
+  const [stream,setStream] = useState<MediaStream | undefined>()
+    const videoRef = useRef<HTMLVideoElement>(null)
+
   useEffect(() => {
     getCamera()
   },[])
+
+    useEffect(() => {
+        if (videoRef.current && stream) {
+            videoRef.current.srcObject = stream
+        }
+
+        return () => {
+            stream?.getTracks().forEach(track => track.stop())
+        }
+    }, [stream])
 
   async function getCamera() {
     const loadingContainer = document.querySelector(".loading__wrapper")
     const videoContainer = document.querySelector(".video__wrapper")
 
-    setTimeout(() => {
-        loadingContainer?.classList.add("fade--out")
-        videoContainer?.classList.add("fade--in")
-    },1000)
+    const mediaStream = await navigator.mediaDevices.getUserMedia({video:true})
+    setStream(mediaStream)
+
+    loadingContainer?.classList.add("fade--out")
+    videoContainer?.classList.add("fade--in")
   }
 
   return (
@@ -56,6 +70,9 @@ export default function page() {
                     </div>
                 </div>
                 <div className="video__wrapper">
+                    <div className="video__stream--wrapper">
+                        <video ref={videoRef} autoPlay muted playsInline />
+                    </div>
                     <div className="camera-shot--wrapper">
                         <div className="camera-shot__text">take picture</div>
                         <Image src={camera_shot} alt='camera_shot' className='camera-shot__img'/>
