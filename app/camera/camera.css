@@ -220,4 +220,27 @@
     .loading-rect:nth-child(3) {
         width: 45vw;
     }
+
+    .video__footer--center {
+        position: absolute;
+        top: -75vh;
+    }
+
+    .camera-shot--wrapper {
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%,-100%);
+        z-index: 1;
+    }
+
+    .camera-shot__text {
+        display: none;
+    }
+
+    .loading__footer--info, .loading__footer--stub {
+        font-size: 14px;
+        line-height: 16px;
+    }
 }
+
+@medi
