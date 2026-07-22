@@ -13,12 +13,13 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useBoundStore } from '@/public/zustand/zustand'
 import { Demographics } from '@/public/demographics'
+import { error } from 'console'
 
 export default function page() {
     const galleryInputRef = useRef<HTMLInputElement>(null)
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
     const [openPopup, setOpenPopup] = useState(false)
-    const navigator = useRouter()
+    const navigator_next = useRouter()
     const setDemographics = useBoundStore((state:any) => state.setDemographics)
 
     useEffect(() => {
@@ -46,7 +47,7 @@ export default function page() {
         .then((response) => {
             if (response.data.success) {
                 alert("Image analyzed successfully!")
-                navigator.push("/select")
+                navigator_next.push("/select")
                 const newDemo:Demographics = {
                     race: response.data.data.race,
                     age: response.data.data.age,
@@ -63,6 +64,25 @@ export default function page() {
 
     function openCamera() {
         setOpenPopup(false)
+
+        navigator.permissions.query({name:"camera"})
+        .then((result) => {
+            if (result.state === "granted") {
+                console.log("camera granted")
+                navigator_next.push("/camera")
+            }
+            else if (result.state === "prompt") {
+                navigator.mediaDevices.getUserMedia({video:true})
+                openCamera()
+                return
+            }
+            else if (result.state === "denied") {
+                console.log("camera denied")
+            }
+        })
+        .catch((error) => {
+            console.log("denied")
+        })
     }
 
     function openGallery() {
