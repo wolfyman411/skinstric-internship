@@ -9,6 +9,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { useBoundStore } from '@/public/zustand/zustand'
 
 export default function page() {
 
@@ -16,6 +18,7 @@ export default function page() {
   const [picture,setPicture] = useState<string | undefined>()
   const videoRef = useRef<HTMLVideoElement>(null)
   const navigator_next = useRouter()
+  const setDemographics = useBoundStore((state:any) => state.setDemographics)
 
   useEffect(() => {
     getCamera()
@@ -32,14 +35,14 @@ export default function page() {
     }, [stream])
 
   async function getCamera() {
-    const loadingContainer = document.querySelector(".loading__wrapper")
-    const videoContainer = document.querySelector(".video__wrapper")
+    const loadingContainer:HTMLElement|null = document.querySelector(".loading__wrapper")
+    const videoContainer:HTMLElement|null = document.querySelector(".video__wrapper")
 
     const mediaStream = await navigator.mediaDevices.getUserMedia({video:true})
     setStream(mediaStream)
 
-    loadingContainer?.classList.add("fade--out")
-    videoContainer?.classList.add("fade--in")
+    loadingContainer?.style.setProperty("opacity", "0")
+    videoContainer?.style.setProperty("opacity", "1")
   }
 
     function takePicture() {
@@ -71,10 +74,33 @@ export default function page() {
         }
     }
 
-    function sendData() {
-        const processingContainer = document.querySelector(".processing__wrapper")
+    async function sendData() {
+        const processingContainer:HTMLElement|null = document.querySelector(".processing__wrapper")
+        const videoContainer:HTMLElement|null = document.querySelector(".video__wrapper")
 
-        processingContainer?.classList.add("fade--in")
+        videoContainer?.style.setProperty("opacity", "0")
+        processingContainer?.style.setProperty("opacity", "1")
+
+        axios
+        .post("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",{
+            image:picture,
+        })
+        .then((response) => {
+            if (response.data.success) {
+                alert("Image analyzed successfully!")
+                navigator_next.push("/select")
+                const newDemo:Demographics = {
+                    race: response.data.data.race,
+                    age: response.data.data.age,
+                    gender: response.data.data.gender,
+                }
+                setDemographics(newDemo)
+            }
+            else {
+                alert("Image upload failed, try again.")
+                navigator_next.push("/camera")
+            }
+        })
     }
 
   return (
@@ -85,6 +111,9 @@ export default function page() {
                     <div className="loading-rect"></div>
                     <div className="loading-rect"></div>
                     <div className="loading-rect"></div>
+                    <div className="loading__header">
+                        <div className="processing__text">Analyzing Image ... </div>
+                    </div>
                 </div>
                 <div className="loading__wrapper">
                     <div className="loading-rect"></div>
