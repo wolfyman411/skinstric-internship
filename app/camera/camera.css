@@ -247,6 +247,14 @@
     animation: pulse 1s infinite ease-in-out;
 }
 
+.logo-text {
+    color: #FCFCFC;
+}
+
+.tab-text {
+    color: #FCFCFC;
+}
+
 @media (max-width: 600px) {
     .loading-rect {
         width: 35vw;

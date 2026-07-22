@@ -11,6 +11,7 @@ import button from "../../public/assets/buttin-icon-shrunk.svg";
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { useBoundStore } from '@/public/zustand/zustand'
+import { Demographics } from '@/public/demographics'
 
 export default function page() {
 
