@@ -219,13 +219,41 @@
     background: #000;
 }
 
-.video__stream--wrapper video {
+.video__stream--wrapper video,
+.video__stream--wrapper img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     max-width: none;
     object-fit: cover;
+}
+
+.picture-taken__text {
+    position: absolute;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FCFCFC;
+    z-index: 2;
+    left: 50%;
+    top: 30vh;
+    transform: translate(-50%, -50%);
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.processing__wrapper {
+    filter: opacity(0);
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    transform: translate(-50%,-50%);
 }
 
 @media (max-width: 600px) {

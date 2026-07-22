@@ -8,11 +8,14 @@ import diamond from "../../public/assets/radio-button.svg"
 import Image from 'next/image'
 import Link from 'next/link'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
+import { useRouter } from 'next/navigation'
 
 export default function page() {
 
   const [stream,setStream] = useState<MediaStream | undefined>()
-    const videoRef = useRef<HTMLVideoElement>(null)
+  const [picture,setPicture] = useState<string | undefined>()
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const navigator_next = useRouter()
 
   useEffect(() => {
     getCamera()
@@ -39,10 +42,50 @@ export default function page() {
     videoContainer?.classList.add("fade--in")
   }
 
+    function takePicture() {
+
+        const video = videoRef.current
+
+        if (!video || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+            return
+        }
+
+        const canvas = document.createElement("canvas")
+        canvas.width = video.videoWidth
+        canvas.height = video.videoHeight
+
+        const context = canvas.getContext("2d")
+        if (!context) return
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height)
+        setPicture(canvas.toDataURL("image/jpeg", 0.9))
+    }
+
+    function backLogic() {
+        if (picture) {
+            setPicture(undefined)
+            getCamera()
+        }
+        else {
+            navigator_next.push("/result")
+        }
+    }
+
+    function sendData() {
+        const processingContainer = document.querySelector(".processing__wrapper")
+
+        processingContainer?.classList.add("fade--in")
+    }
+
   return (
     <section id="camera" className="container">
         <div className="row">
             <div className="wrapper__wrapper">
+                <div className="processing__wrapper">
+                    <div className="loading-rect"></div>
+                    <div className="loading-rect"></div>
+                    <div className="loading-rect"></div>
+                </div>
                 <div className="loading__wrapper">
                     <div className="loading-rect"></div>
                     <div className="loading-rect"></div>
@@ -71,19 +114,28 @@ export default function page() {
                 </div>
                 <div className="video__wrapper">
                     <div className="video__stream--wrapper">
-                        <video ref={videoRef} autoPlay muted playsInline />
+                        {picture ? (
+                            <>
+                                <div className="picture-taken__text">Great Shot!</div>
+                                <img src={picture} alt="picture" />
+                            </>
+                        ) : (
+                            <video ref={videoRef} autoPlay muted playsInline />
+                        )}
                     </div>
-                    <div className="camera-shot--wrapper">
-                        <div className="camera-shot__text">take picture</div>
-                        <Image src={camera_shot} alt='camera_shot' className='camera-shot__img'/>
-                    </div>
+                    {!picture && (
+                        <div className="camera-shot--wrapper" onClick={takePicture}>
+                            <div className="camera-shot__text">take picture</div>
+                            <Image src={camera_shot} alt='camera_shot' className='camera-shot__img'/>
+                        </div>
+                    )}
                     <div className="video__footer">
                         <div className="video__footer--left">
                             <div className="testing-back">
-                                <Link href="/select" className="home-button--wrapper">
+                                <div className="home-button--wrapper" onClick={backLogic}>
                                     <Image src={button} alt="back"/>
                                     <div className="back-button--text">BACK</div>
-                                </Link>
+                                </div>
                             </div>
                         </div>
                         <div className="video__footer--center">
@@ -103,12 +155,12 @@ export default function page() {
                                 </div>
                             </div>
                         </div>
-                        <div className="video__footer--right">
+                        <div className={`video__footer--right ${!picture && " hidden"}`}>
                             <div className="testing-back">
-                                <Link href="/select" className="home-button--wrapper">
+                                <div className="home-button--wrapper" onClick={sendData}>
                                     <div className="back-button--text back-button--text--right">PROCEED</div>
                                     <Image src={button} alt="back" style={{rotate:"180deg"}}/>
-                                </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
