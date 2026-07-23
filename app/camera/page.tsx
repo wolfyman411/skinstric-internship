@@ -39,11 +39,16 @@ export default function page() {
     }, [stream])
 
   async function getCamera() {
-    const mediaStream = await navigator.mediaDevices.getUserMedia({video:true})
-    setStream(mediaStream)
+    try {
+        const mediaStream = await navigator.mediaDevices.getUserMedia({video:true})
+        setStream(mediaStream)
 
-    loadingWrapperRef.current?.style.setProperty("opacity", "0")
-    videoWrapperRef.current?.style.setProperty("opacity", "1")
+        loadingWrapperRef.current?.style.setProperty("opacity", "0")
+        videoWrapperRef.current?.style.setProperty("opacity", "1")
+    } catch (e) {
+        alert("There was an issue connecting your camera.")
+        navigator_next.push('/result')
+    }
   }
 
     function takePicture() {

@@ -257,12 +257,18 @@
     line-height: 40px;
     letter-spacing: -5%;
     display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-display--graph-number {
+    
 }
 
 .chart-display--graph-percentage {
     font-size: 24px;
-    position: absolute;
-    left: 44px;
+    position: relative;
     top: -8px;
 }
 
