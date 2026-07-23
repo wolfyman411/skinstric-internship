@@ -10,7 +10,7 @@ export default function Header() {
   const pathname = usePathname()
 
   function headerReturn() {
-    if (pathname === "/" || pathname === "/testing") {
+    if (pathname === "/" || pathname === "/testing" || pathname === "/result") {
       return " INTRO "
     }
     else {
@@ -26,7 +26,7 @@ export default function Header() {
   }
 
   return (
-    <div className={`${styles["header"]} container`}>
+    <div className={`${styles["header"]} container ${pathname === "/summary" && styles["header--background"]}`}>
       <Link href="/" className={styles["header-left"]}>
         <div className={`${styles["logo-text"]} ${isWhite() && styles["logo-text--white"]}`}>SKINSTRIC</div>
         <div className={`${styles["tab-text"]} ${isWhite() && styles["tab-text--white"]}`}>[ {headerReturn()} ]</div>

@@ -105,12 +105,13 @@
 }
 
 .processing--wrapper {
-    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes spin {
@@ -132,6 +133,7 @@
     transform: translate(-50%, -50%);
     margin-left: 300px;
     margin-top: 80px;
+    z-index: 2;
 }
 
 .popup__footer {
@@ -204,5 +206,10 @@
         width: 100%;
         height: 50%;
         position: relative;
+    }
+
+    .popup__wrapper {
+        margin-left: 0px;
+        margin-top: 160px;
     }
 }

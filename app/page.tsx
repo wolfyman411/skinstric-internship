@@ -34,10 +34,10 @@ export default function Home() {
               a highly-personalised routine tailored to
               what your skin needs.
             </div>
-            <div className="home-button--wrapper">
+            <Link href="/testing" className="home-button--wrapper">
               <div className="home-button--text">TAKE TEST</div>
               <Image src={button} alt="right" style={{ rotate: "180deg" }} />
-            </div>
+            </Link>
           </div>
         </div>
         <div className={`home-button ${hoverState === "left" ? "hidden" : ""}`}>

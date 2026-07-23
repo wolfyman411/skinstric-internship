@@ -190,7 +190,7 @@ export default function page() {
                 <div className={styles["chart-display"]}>
                     <div className={styles["chart-tab--line"]}></div>
                     <div className={styles["chart-display--wrapper"]}>
-                        <div className={styles["chart-display--title"]}>{selectedItem[0]}</div>
+                        <div className={styles["chart-display--title"]}>{selectedItem[0]}{displayCategory === "age" && " y.o."}</div>
                         <div className={styles["chart-display--graph--wrapper"]}>
                             <canvas ref={chartRef} className={styles["chart-display--graph"]} />
                             <div className={styles["chart-display--graph-text"]}>
