@@ -184,11 +184,11 @@
         filter: invert() brightness(100);
     }
 
-    .testing-back img{
+    :global(.testing-back) img{
         filter: invert() brightness(100);
     }
 
-    .back-button--text {
+    :global(.back-button--text) {
         color: #FCFCFC;
     }
 }

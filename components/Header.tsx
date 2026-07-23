@@ -18,11 +18,18 @@ export default function Header() {
     }
   }
 
+  function isWhite() {
+    if (pathname === "/camera") {{
+      return true
+    }}
+    return false
+  }
+
   return (
     <div className={`${styles["header"]} container`}>
       <Link href="/" className={styles["header-left"]}>
-        <div className={styles["logo-text"]}>SKINSTRIC</div>
-        <div className={styles["tab-text"]}>[ {headerReturn()} ]</div>
+        <div className={`${styles["logo-text"]} ${isWhite() && styles["logo-text--white"]}`}>SKINSTRIC</div>
+        <div className={`${styles["tab-text"]} ${isWhite() && styles["tab-text--white"]}`}>[ {headerReturn()} ]</div>
       </Link>
       {pathname === "/" && (
         <div className={styles["button-simple"]}>ENTER CODE</div>

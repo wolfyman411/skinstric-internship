@@ -26,6 +26,10 @@
     padding-left: 8px;
 }
 
+.logo-text--white, .tab-text--white {
+    color: #FCFCFC
+}
+
 .button-simple {
     opacity: 1;
     padding: 8px 16px;
