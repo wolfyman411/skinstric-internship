@@ -8,13 +8,14 @@ import button from "../../public/assets/buttin-icon-shrunk.svg";
 import radioButtion from "../../public/assets/radio-button.svg"
 import radioButtionChecked from "../../public/assets/radio-button-checked.svg"
 import { ArcElement, Chart, DoughnutController, Tooltip } from 'chart.js';
-import { defaultDemo, Demographics, getHighest, getSortedInfo } from '@/public/demographics'
+import { defaultDemo, Demographics, getHighest, getSortedInfo, sortAges } from '@/public/demographics'
 import { useBoundStore } from '@/public/zustand/zustand'
 
 Chart.register(DoughnutController, ArcElement, Tooltip)
 
 export default function page() {
   const chartRef = useRef<HTMLCanvasElement | null>(null)
+  const chartInstanceRef = useRef<Chart | null>(null);
   const [displayItems, setDisplayItems] = useState<[string, number][]>([])
   const [displayCategory,setDisplayCategory] = useState("")
   const [selectedItem, setSelectedItem] = useState<[string, number]>(["", 0])
@@ -29,21 +30,40 @@ export default function page() {
 
   useEffect(() => {
     // If demo doesn't exist, force it to use the temp one
-    if (!demo.race) {
-        setDemo(defaultDemo)
-        setRace(getHighest(defaultDemo,"race"))
-        setAge(getHighest(defaultDemo,"age"))
-        setSex(getHighest(defaultDemo,"sex"))
-        setDisplayItems(getSortedInfo(defaultDemo,"race"))
-    } else {
-        setRace(getHighest(demo,"race"))
-        setAge(getHighest(demo,"age"))
-        setSex(getHighest(demo,"sex"))
-        setDisplayItems(getSortedInfo(demo,"race"))
+    let ref = defaultDemo
+
+    if (demo.race) {
+        ref = demo
     }
+
+    setDemo(ref)
+    setRace(getHighest(ref,"race"))
+    setAge(getHighest(ref,"age"))
+    setSex(getHighest(ref,"sex"))
+    setDisplayItems(getSortedInfo(ref,"race"))
+    setSelectedItem(getHighest(ref,"race"))
+    setDisplayCategory("race")
+
+    createChart()
   },[])
 
   useEffect(() => {
+
+    if (!chartInstanceRef.current) {
+        return
+    }
+
+    const newValue = Math.floor(selectedItem[1] * 100)
+    chartInstanceRef.current.data.datasets[0].data = [newValue, 100 - newValue];
+    chartInstanceRef.current.update()
+
+  },[demo,selectedItem])
+
+  function createChart() {
+    if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy()
+    }
+
     if (!chartRef.current) return
 
     const chart = new Chart(chartRef.current, {
@@ -67,11 +87,17 @@ export default function page() {
       },
     })
 
-    return () => chart.destroy()
-  }, [selectedItem, demo])
+    chartInstanceRef.current = chart
+  }
 
   function getDisplay(type:string) {
-    setDisplayItems(getSortedInfo(demo,type))
+    // Handle differently with ages
+    if (type === "age") {
+        setDisplayItems(sortAges(demo))
+    }
+    else {
+        setDisplayItems(getSortedInfo(demo,type))
+    }
     setDisplayCategory(type)
   }
 
@@ -168,7 +194,7 @@ export default function page() {
                         <div className={styles["chart-display--graph--wrapper"]}>
                             <canvas ref={chartRef} className={styles["chart-display--graph"]} />
                             <div className={styles["chart-display--graph-text"]}>
-                                <div>{Math.floor(selectedItem[1] * 100)}</div>
+                                <div className={styles["chart-display--graph-number"]}>{Math.floor(selectedItem[1] * 100)}</div>
                                 <div className={styles["chart-display--graph-percentage"]}>%</div>
                             </div>
                         </div>

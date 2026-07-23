@@ -20,7 +20,27 @@ export function getSortedInfo(demo: Demographics, type: string): [string, number
         return [];
     }
 
-    return Object.entries(info).sort((a, b) => b[1] - a[1])
+    // Capitalize if not age
+    let processedInfo = info
+    if (type !== "age") {
+        const capitalizedEntries = Object.entries(info).map(([key, value]) => [
+            capitalizeWord(key),
+            value
+        ]);
+        processedInfo = Object.fromEntries(capitalizedEntries)
+    }
+
+    return Object.entries(processedInfo).sort((a, b) => b[1] - a[1])
+}
+
+export function sortAges(demo:Demographics): [string,number][] {
+    const info = demo.age
+    const sorted = Object.entries(info).sort((a, b) => {
+        const numA = parseInt(a[0].split("-")[0])
+        const numB = parseInt(b[0].split("-")[0])
+        return numA - numB
+    })
+    return sorted
 }
 
 export function getHighest(demo: Demographics, type: string): [string,number] {
@@ -29,6 +49,11 @@ export function getHighest(demo: Demographics, type: string): [string,number] {
         return ["",0]
     }
     return value
+}
+
+// Helper function to assist in returning values
+function capitalizeWord(val:string) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
 export const defaultDemo:Demographics = { // This is a fallback used for testing OR if the user skips image upload
