@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
-import "./testing.css"
+import styles from "./testing.module.css"
 import axios from 'axios';
 import Processing from '@/components/Processing';
 
@@ -75,16 +75,16 @@ export default function page() {
         if (finished) {
             return (
                 <>
-                <div className="testing-subtitle--bigger">Thank You!</div>
-                <div className="testing-subtitle">Proceed to the next step</div>
+                <div className={styles["testing-subtitle--bigger"]}>Thank You!</div>
+                <div className={styles["testing-subtitle"]}>Proceed to the next step</div>
                 </>
             )
         }
         else {
             return (
                 <>
-                <div className="testing-subtitle">click to type</div>
-                <div className="testing-error">{errorMessage}</div>
+                <div className={styles["testing-subtitle"]}>click to type</div>
+                <div className={styles["testing-error"]}>{errorMessage}</div>
                 {displayHTML()}
                 </>
             )
@@ -98,7 +98,7 @@ export default function page() {
             <input
                 key="name"
                 type="text"
-                className="testing-input"
+                className={styles["testing-input"]}
                 placeholder='Introduce Yourself'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -112,7 +112,7 @@ export default function page() {
             <input
                 key="location"
                 type="text"
-                className="testing-input"
+                className={styles["testing-input"]}
                 placeholder='Where are you from?'
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
@@ -123,16 +123,16 @@ export default function page() {
   }
 
   return (
-    <section id="testing" className="container">
+    <section className={`${styles.testing} container`}>
         <div className="row">
-            <div className="testing-analysis">to start analysis</div>
-            <div className="testing-form">
-                <div className="testing-rectangle"></div>
-                <div className="testing-rectangle"></div>
-                <div className="testing-rectangle"></div>
+            <div className={styles["testing-analysis"]}>to start analysis</div>
+            <div className={styles["testing-form"]}>
+                <div className={styles["testing-rectangle"]}></div>
+                <div className={styles["testing-rectangle"]}></div>
+                <div className={styles["testing-rectangle"]}></div>
                 {formHTML()}
             </div>
-            <div className="buttons--wrapper">
+            <div className={styles["buttons--wrapper"]}>
                 <div className="testing-back">
                     <Link href="/" className="home-button--wrapper">
                         <Image src={button} alt="back"/>

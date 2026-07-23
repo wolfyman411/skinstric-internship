@@ -213,10 +213,6 @@ a {
   }
 }
 
-/*MEDIUM DEVICES*/
-@media (max-width: 768px){
-}
-
 /*SMALL DEVICES*/
 @media (max-width: 480px) {
   .home-title {

@@ -1,4 +1,4 @@
-#testing {
+.testing {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-#testing .row {
+.testing :global(.row) {
     flex-direction: column;
     justify-content: center;
     height: 100%;
