@@ -1,9 +1,9 @@
-#summary .container {
+.summary {
     width: 100vw;
     height: 100vh;
 }
 
-#summary .row {
+.summary :global(.row) {
     width: 100%;
     height: 100%;
     display: flex;
@@ -314,7 +314,7 @@
         padding-bottom: 24px;
     }
 
-    header {
+    :global(header) {
         background-color: #FCFCFC;
     }
 
