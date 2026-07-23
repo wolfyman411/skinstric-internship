@@ -3,12 +3,12 @@
     position: absolute;
 }
 
-#select.container {
+.select {
     width: 100vw;
     height: 100vh;
 }
 
-#select .row {
+.select :global(.row) {
     width: 100%;
     height: 100%;
 }

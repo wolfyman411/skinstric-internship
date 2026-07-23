@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import "./result.css"
+import styles from "./result.module.css"
 import camera_img from '../../public/assets/camera.svg'
 import gallery_img from '../../public/assets/gallery.svg'
 import pointer_img from '../../public/assets/pointer.svg'
@@ -13,7 +13,6 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useBoundStore } from '@/public/zustand/zustand'
 import { Demographics } from '@/public/demographics'
-import { error } from 'console'
 
 export default function page() {
     const galleryInputRef = useRef<HTMLInputElement>(null)
@@ -107,22 +106,22 @@ export default function page() {
                 onChange={handleGalleryChange}
                 hidden
             />
-            <div className="option--wrapper">
-                <div className="option-rect"></div>
-                <div className="option-rect"></div>
-                <div className="option-rect"></div>
-                <Image src={pointer_img} alt='pointer' className='pointer'/>
-                <Image src={camera_img} alt='camera' className='option-icon' onClick={() => setOpenPopup(true)}/>
-                <div className="option-text">allow a.i.<br/>to scan your face</div>
+            <div className={styles["option--wrapper"]}>
+                <div className={styles["option-rect"]}></div>
+                <div className={styles["option-rect"]}></div>
+                <div className={styles["option-rect"]}></div>
+                <Image src={pointer_img} alt='pointer' className={styles.pointer}/>
+                <Image src={camera_img} alt='camera' className={styles["option-icon"]} onClick={() => setOpenPopup(true)}/>
+                <div className={styles["option-text"]}>allow a.i.<br/>to scan your face</div>
                 {openPopup && popupHTML()}
             </div>
-            <div className="option--wrapper" onClick={openGallery}>
-                <div className="option-rect"></div>
-                <div className="option-rect"></div>
-                <div className="option-rect"></div>
-                <Image src={pointer_img} alt='pointer' className='pointer pointer--right'/>
-                <Image src={gallery_img} alt='gallery' className='option-icon'/>
-                <div className="option-text option-text--right">allow a.i.<br/>to access gallery</div>
+            <div className={styles["option--wrapper"]} onClick={openGallery}>
+                <div className={styles["option-rect"]}></div>
+                <div className={styles["option-rect"]}></div>
+                <div className={styles["option-rect"]}></div>
+                <Image src={pointer_img} alt='pointer' className={`${styles.pointer} ${styles["pointer--right"]}`}/>
+                <Image src={gallery_img} alt='gallery' className={styles["option-icon"]}/>
+                <div className={`${styles["option-text"]} ${styles["option-text--right"]}`}>allow a.i.<br/>to access gallery</div>
             </div>
             </>
         )
@@ -130,10 +129,10 @@ export default function page() {
 
     function loadingHTML() {
         return (
-            <div className='processing--wrapper'>
-                <div className="option-rect"></div>
-                <div className="option-rect"></div>
-                <div className="option-rect"></div>
+            <div className={styles["processing--wrapper"]}>
+                <div className={styles["option-rect"]}></div>
+                <div className={styles["option-rect"]}></div>
+                <div className={styles["option-rect"]}></div>
                 <Processing/>
             </div>
         )
@@ -141,24 +140,24 @@ export default function page() {
 
     function popupHTML() {
         return (
-            <div className="popup__wrapper">
-                <div className="popup__text">Allow A.I to access your camera</div>
-                <div className="popup__footer">
-                    <div className="popup__btn" onClick={() => setOpenPopup(false)}>Deny</div>
-                    <div className="popup__btn" onClick={() => openCamera()}>Allow</div>
+            <div className={styles["popup__wrapper"]}>
+                <div className={styles["popup__text"]}>Allow A.I to access your camera</div>
+                <div className={styles["popup__footer"]}>
+                    <div className={styles["popup__btn"]} onClick={() => setOpenPopup(false)}>Deny</div>
+                    <div className={styles["popup__btn"]} onClick={() => openCamera()}>Allow</div>
                 </div>
             </div>
         )
     }
 
   return (
-    <section id="result" className='container'>
+    <section className={`${styles.result} container`}>
         <div className="row">
-            <div className="result-analysis">to start analysis</div>
-            <div className="options-container">
+            <div className={styles["result-analysis"]}>to start analysis</div>
+            <div className={styles["options-container"]}>
                 {selectedImage ? loadingHTML() : defaultHTML()}
             </div>
-            <div className="result-back">
+            <div className={styles["result-back"]}>
                 <Link href="/testing" className="home-button--wrapper">
                     <Image src={button} alt="back"/>
                     <div className="back-button--text">BACK</div>

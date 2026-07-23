@@ -1,42 +1,42 @@
 import React from 'react'
-import "./select.css"
+import styles from "./select.module.css"
 import Image from 'next/image'
 import button from "../../public/assets/buttin-icon-shrunk.svg";
 import Link from 'next/link';
 
 export default function page() {
   return (
-    <section id="select" className="container">
+    <section className={`${styles.select} container`}>
         <div className="row">
-            <div className="select-analysis">
-                <div className="select-analysis--header">A.I. ANALYSIS</div>
-                <div className="select-analysis--footer">a.i. has estimated the following.<br/>fix estimated information if needed.</div>
+            <div className={styles["select-analysis"]}>
+                <div className={styles["select-analysis--header"]}>A.I. ANALYSIS</div>
+                <div className={styles["select-analysis--footer"]}>a.i. has estimated the following.<br/>fix estimated information if needed.</div>
             </div>
-            <div className="options--wrapper">
+            <div className={styles["options--wrapper"]}>
                 <div className="pulse">
-                    <div className="option-rect--pulse"></div>
-                    <div className="option-rect--pulse"></div>
-                    <div className="option-rect--pulse"></div>
-                    <div className="option-rect--pulse"></div>
+                    <div className={styles["option-rect--pulse"]}></div>
+                    <div className={styles["option-rect--pulse"]}></div>
+                    <div className={styles["option-rect--pulse"]}></div>
+                    <div className={styles["option-rect--pulse"]}></div>
                 </div>
-                <Link href={"/summary"} className="option">
-                    <div className="option-square"></div>
-                    <div className="option-text">demographics</div>
+                <Link href={"/summary"} className={styles.option}>
+                    <div className={styles["option-square"]}></div>
+                    <div className={styles["option-text"]}>demographics</div>
                 </Link>
-                <div className="option">
-                    <div className="option-square"></div>
-                    <div className="option-text">cosmetic<br/>concerns</div>
+                <div className={styles.option}>
+                    <div className={styles["option-square"]}></div>
+                    <div className={styles["option-text"]}>cosmetic<br/>concerns</div>
                 </div>
-                <div className="option">
-                    <div className="option-square"></div>
-                    <div className="option-text">weather</div>
+                <div className={styles.option}>
+                    <div className={styles["option-square"]}></div>
+                    <div className={styles["option-text"]}>weather</div>
                 </div>
-                <div className="option">
-                    <div className="option-square"></div>
-                    <div className="option-text">skin type<br/>details</div>
+                <div className={styles.option}>
+                    <div className={styles["option-square"]}></div>
+                    <div className={styles["option-text"]}>skin type<br/>details</div>
                 </div>
             </div>
-             <div className="buttons--wrapper">
+             <div className={styles["buttons--wrapper"]}>
                 <div className="testing-back">
                     <Link href="/result" className="home-button--wrapper">
                         <Image src={button} alt="back"/>
