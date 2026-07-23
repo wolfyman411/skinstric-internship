@@ -106,6 +106,7 @@
 
 .loading__footer--stubs {
     display: flex;
+    justify-content: center;
     gap: 32px
 }
 

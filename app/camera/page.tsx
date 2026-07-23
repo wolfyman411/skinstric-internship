@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react'
-import "./camera.css"
+import styles from "./camera.module.css"
 import camera_icon from "../../public/assets/camera.svg"
 import camera_shot from "../../public/assets/camera_shot.svg"
 import diamond from "../../public/assets/radio-button.svg"
@@ -17,6 +17,9 @@ export default function page() {
 
   const [stream,setStream] = useState<MediaStream | undefined>()
   const [picture,setPicture] = useState<string | undefined>()
+  const loadingWrapperRef = useRef<HTMLDivElement|null>(null)
+  const videoWrapperRef = useRef<HTMLDivElement|null>(null)
+  const processingWrapperRef = useRef<HTMLDivElement|null>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const navigator_next = useRouter()
   const setDemographics = useBoundStore((state:any) => state.setDemographics)
@@ -36,14 +39,11 @@ export default function page() {
     }, [stream])
 
   async function getCamera() {
-    const loadingContainer:HTMLElement|null = document.querySelector(".loading__wrapper")
-    const videoContainer:HTMLElement|null = document.querySelector(".video__wrapper")
-
     const mediaStream = await navigator.mediaDevices.getUserMedia({video:true})
     setStream(mediaStream)
 
-    loadingContainer?.style.setProperty("opacity", "0")
-    videoContainer?.style.setProperty("opacity", "1")
+    loadingWrapperRef.current?.style.setProperty("opacity", "0")
+    videoWrapperRef.current?.style.setProperty("opacity", "1")
   }
 
     function takePicture() {
@@ -76,11 +76,8 @@ export default function page() {
     }
 
     async function sendData() {
-        const processingContainer:HTMLElement|null = document.querySelector(".processing__wrapper")
-        const videoContainer:HTMLElement|null = document.querySelector(".video__wrapper")
-
-        videoContainer?.style.setProperty("opacity", "0")
-        processingContainer?.style.setProperty("opacity", "1")
+        videoWrapperRef.current?.style.setProperty("opacity", "0")
+        processingWrapperRef.current?.style.setProperty("opacity", "1")
 
         axios
         .post("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",{
@@ -105,48 +102,48 @@ export default function page() {
     }
 
   return (
-    <section id="camera" className="container">
-        <div className="row">
-            <div className="wrapper__wrapper">
-                <div className="processing__wrapper">
-                    <div className="loading-rect"></div>
-                    <div className="loading-rect"></div>
-                    <div className="loading-rect"></div>
-                    <div className="loading__header">
-                        <div className="processing__text">Analyzing Image ... </div>
+    <section id="camera" className={styles["container"]}>
+        <div className={styles["row"]}>
+            <div className={styles["wrapper__wrapper"]}>
+                <div ref={processingWrapperRef} className={styles["processing__wrapper"]}>
+                    <div className={styles["loading-rect"]}></div>
+                    <div className={styles["loading-rect"]}></div>
+                    <div className={styles["loading-rect"]}></div>
+                    <div className={styles["loading__header"]}>
+                        <div className={styles["processing__text"]}>Analyzing Image ... </div>
                     </div>
                 </div>
-                <div className="loading__wrapper">
-                    <div className="loading-rect"></div>
-                    <div className="loading-rect"></div>
-                    <div className="loading-rect"></div>
-                    <div className="loading__header">
-                        <Image src={camera_icon} alt="camera" className='loading__img'/>
-                        <div className="loading__text">Setting Up Camera ... </div>
+                <div ref={loadingWrapperRef} className={styles["loading__wrapper"]}>
+                    <div className={styles["loading-rect"]}></div>
+                    <div className={styles["loading-rect"]}></div>
+                    <div className={styles["loading-rect"]}></div>
+                    <div className={styles["loading__header"]}>
+                        <Image src={camera_icon} alt="camera" className={styles["loading__img"]}/>
+                        <div className={styles["loading__text"]}>Setting Up Camera ... </div>
                     </div>
-                    <div className="loading__footer">
-                        <div className="loading__footer--info">to get better results make sure to have</div>
-                        <div className="loading__footer--stubs">
-                            <div className="loading__footer--stub">
-                                <Image src={diamond} alt="diamond" className='loading__footer--image'/>
-                                <div className="loading__footer--text">neutral expression</div>
+                    <div className={styles["loading__footer"]}>
+                        <div className={styles["loading__footer--info"]}>to get better results make sure to have</div>
+                        <div className={styles["loading__footer--stubs"]}>
+                            <div className={styles["loading__footer--stub"]}>
+                                <Image src={diamond} alt="diamond" className={styles["loading__footer--image"]}/>
+                                <div className={styles["loading__footer--text"]}>neutral expression</div>
                             </div>
-                            <div className="loading__footer--stub">
-                                <Image src={diamond} alt="diamond" className='loading__footer--image'/>
-                                <div className="loading__footer--text">frontal pose</div>
+                            <div className={styles["loading__footer--stub"]}>
+                                <Image src={diamond} alt="diamond" className={styles["loading__footer--image"]}/>
+                                <div className={styles["loading__footer--text"]}>frontal pose</div>
                             </div>
-                            <div className="loading__footer--stub">
-                                <Image src={diamond} alt="diamond" className='loading__footer--image'/>
-                                <div className="loading__footer--text">adequate lighting</div>
+                            <div className={styles["loading__footer--stub"]}>
+                                <Image src={diamond} alt="diamond" className={styles["loading__footer--image"]}/>
+                                <div className={styles["loading__footer--text"]}>adequate lighting</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="video__wrapper">
-                    <div className="video__stream--wrapper">
+                <div ref={videoWrapperRef} className={styles["video__wrapper"]}>
+                    <div className={styles["video__stream--wrapper"]}>
                         {picture ? (
                             <>
-                                <div className="picture-taken__text">Great Shot!</div>
+                                <div className={styles["picture-taken__text"]}>Great Shot!</div>
                                 <img src={picture} alt="picture" />
                             </>
                         ) : (
@@ -154,13 +151,13 @@ export default function page() {
                         )}
                     </div>
                     {!picture && (
-                        <div className="camera-shot--wrapper" onClick={takePicture}>
-                            <div className="camera-shot__text">take picture</div>
-                            <Image src={camera_shot} alt='camera_shot' className='camera-shot__img'/>
+                        <div className={styles["camera-shot--wrapper"]} onClick={takePicture}>
+                            <div className={styles["camera-shot__text"]}>take picture</div>
+                            <Image src={camera_shot} alt='camera_shot' className={styles["camera-shot__img"]}/>
                         </div>
                     )}
-                    <div className="video__footer">
-                        <div className="video__footer--left">
+                    <div className={styles["video__footer"]}>
+                        <div className={styles["video__footer--left"]}>
                             <div className="testing-back">
                                 <div className="home-button--wrapper" onClick={backLogic}>
                                     <Image src={button} alt="back"/>
@@ -168,24 +165,24 @@ export default function page() {
                                 </div>
                             </div>
                         </div>
-                        <div className="video__footer--center">
-                            <div className="loading__footer--info">to get better results make sure to have</div>
-                            <div className="loading__footer--stubs">
-                                <div className="loading__footer--stub">
-                                    <Image src={diamond} alt="diamond" className='loading__footer--image'/>
-                                    <div className="loading__footer--text">neutral expression</div>
+                        <div className={styles["video__footer--center"]}>
+                            <div className={styles["loading__footer--info"]}>to get better results make sure to have</div>
+                            <div className={styles["loading__footer--stubs"]}>
+                                <div className={styles["loading__footer--stub"]}>
+                                    <Image src={diamond} alt="diamond" className={styles["loading__footer--image"]}/>
+                                    <div className={styles["loading__footer--text"]}>neutral expression</div>
                                 </div>
-                                <div className="loading__footer--stub">
-                                    <Image src={diamond} alt="diamond" className='loading__footer--image'/>
-                                    <div className="loading__footer--text">frontal pose</div>
+                                <div className={styles["loading__footer--stub"]}>
+                                    <Image src={diamond} alt="diamond" className={styles["loading__footer--image"]}/>
+                                    <div className={styles["loading__footer--text"]}>frontal pose</div>
                                 </div>
-                                <div className="loading__footer--stub">
-                                    <Image src={diamond} alt="diamond" className='loading__footer--image'/>
-                                    <div className="loading__footer--text">adequate lighting</div>
+                                <div className={styles["loading__footer--stub"]}>
+                                    <Image src={diamond} alt="diamond" className={styles["loading__footer--image"]}/>
+                                    <div className={styles["loading__footer--text"]}>adequate lighting</div>
                                 </div>
                             </div>
                         </div>
-                        <div className={`video__footer--right ${!picture && " hidden"}`}>
+                        <div className={`${styles["video__footer--right"]} ${!picture ? styles["hidden"] : ''}`}>
                             <div className="testing-back">
                                 <div className="home-button--wrapper" onClick={sendData}>
                                     <div className="back-button--text back-button--text--right">PROCEED</div>
