@@ -17,6 +17,7 @@ export default function Home() {
           <div className="home-button--rectangle"></div>
           <div
             className="home-button--wrapper"
+            style={{ cursor: "not-allowed" }}
             onMouseEnter={() => setHoverState("left")}
             onMouseLeave={() => setHoverState("")}
           >
