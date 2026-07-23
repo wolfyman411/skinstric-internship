@@ -123,7 +123,7 @@ export default function page() {
   }
 
   return (
-    <section className={`${styles.testing} container`}>
+    <section className={`${styles.testing} container fade-anim`}>
         <div className="row">
             <div className={styles["testing-analysis"]}>to start analysis</div>
             <div className={styles["testing-form"]}>
@@ -140,7 +140,7 @@ export default function page() {
                     </Link>
                 </div>
                 {finished && (
-                    <div className="testing-back">
+                    <div className="testing-back fade-anim">
                         <Link href="/result" className="home-button--wrapper">
                             <div className="back-button--text back-button--text--right">PROCEED</div>
                             <Image src={button} alt="next" style={{rotate:"180deg"}}/>

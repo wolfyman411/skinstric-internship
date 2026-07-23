@@ -213,6 +213,21 @@ a {
   }
 }
 
+/*Anims*/
+.fade-anim {
+  opacity: 0;
+  animation: fade ease 2s 0.5s forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /*SMALL DEVICES*/
 @media (max-width: 480px) {
   .home-title {

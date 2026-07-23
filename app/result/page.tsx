@@ -151,7 +151,7 @@ export default function page() {
     }
 
   return (
-    <section className={`${styles.result} container`}>
+    <section className={`${styles.result} container fade-anim`}>
         <div className="row">
             <div className={styles["result-analysis"]}>to start analysis</div>
             <div className={styles["options-container"]}>
